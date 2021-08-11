@@ -1,0 +1,45 @@
+{
+    "cartas": [{
+        "id": 0,
+        "imagen": "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/292/497/products/guatemala1-27c170a9e0b7faa6c216093424004005-640-0.jpg",
+        "nombre": "CAFÉ GENUINO BOCNAT 232 X 1KG EN GRANO O MOLIDO",
+        "origen": "Brasil",
+        "precio": 2490
+        },
+        {
+        "id": 1,
+        "imagen":"https://d3ugyf2ht6aenh.cloudfront.net/stores/001/292/497/products/guatemala1-27c170a9e0b7faa6c216093424004005-640-0.jpg",
+        "nombre": "Café Bourbon Moka x 1Kg en grano o molido",
+        "origen":"Brasil",
+        "precio": 2400
+        },
+        {
+        "id": 2,
+        "imagen": "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/292/497/products/guatemala1-27c170a9e0b7faa6c216093424004005-640-0.jpg",
+        "nombre": "CAFÉ OH! GUANES GENUINO X 1KG EN GRANO O MOLIDO",
+        "origen": "Colombia",
+        "precio": 2750
+        },
+        {
+        "id": 3,
+        "imagen": "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/292/497/products/guatemala1-27c170a9e0b7faa6c216093424004005-640-0.jpg",
+        "nombre": "Café Excelso Descafeinado x 1Kg en grano o molido",
+        "origen":"Colombia",
+        "precio": 3220
+        },
+        {
+        "id": 4,
+        "imagen": "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/292/497/products/guatemala1-27c170a9e0b7faa6c216093424004005-640-0.jpg",
+        "nombre": "Café De Especialidad Orgánico 1kg Grano O Molido",
+        "origen": "Etiopía",
+        "precio": 5240
+        },
+        {
+        "id": 5,
+        "imagen":"https://d3ugyf2ht6aenh.cloudfront.net/stores/001/292/497/products/guatemala1-27c170a9e0b7faa6c216093424004005-640-0.jpg",
+        "nombre": "Café de Especialidad Cristal x 1Kg en grano o molido",
+        "origen": "Guatemala",
+        "precio": 4250
+        }
+    ]
+}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" href="../fotos/logo_para_html_cafe.png" sizes="32x32" />
+    <link rel="stylesheet" href="../css/final.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Viewport" content="width=device-width,initial-scale=1.0"/>
+    <!--SEO-->
+    <meta name="keywords" content="formulario, consultas, stock, empresa">
+    <meta name="description" content="venta por menor y por mayor de granos de cafe organicos importados">
+    <title>
+      cafetin/formulario
+    </title>  
+  </head>
+  <body id="background">
+    <!--NAVBAR-->
+    <nav class="navbar navbar-expand-lg navbar-dark indicaciones header">
+      <a class="navbar-brand" href="../index.html">
+        <img src="../fotos/logo_para_html_cafe.png" width="70" height="70" alt="imagen de un cartel con una taza de cafe">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="products.html">Productos</a>
+          </li>
+            <a class="nav-link" href="preguntas.html">Preguntas frecuentes</a>
+          <li class="nav-item">
+            <a class="nav-link" href="contacto.html">Contactenos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Blog</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!--FORMULARIO-->
+    <div class="container">
+      <div class="row justify-content-center">
+        <H1 class="titulo-formulario">FORMULARIO DE CONSULTA</H1>
+      </div>
+    </div>
+      <form class="formulario container">
+            <div class="row justify-content-center">
+              <div class="col-8 col-lg-6">
+                <input type="text" class="form-control" placeholder="nombre">
+              </div>
+            </div>
+              <div class="row justify-content-center separar">
+                <div class="col-8 col-lg-6">
+                  <input type="text" class="form-control" placeholder="apellido">
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="form-group col-8 col-lg-6">
+                <label for="exampleFormControlInput1" class="texto-formulario">Email </label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="form-group col-8 col-lg-6">
+                <label for="formGroupExampleInput" class=" texto-formulario">Telefono</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Telefono">
+              </div>
+            </div>
+              <div class="row justify-content-center">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                  <label class="form-check-label texto-formulario" for="inlineCheckbox1">Persona juridica</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                  <label class="form-check-label texto-formulario" for="inlineCheckbox2">Persona física</label>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="form-group col-8 col-lg-6">
+                <label class="texto-formulario" for="exampleFormControlSelect1">Tipo de cafe</label>
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>cafe de brasil</option>
+                  <option>cafe de colombia</option>
+                </select>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="form-group col-8 col-lg-6">
+                <label class="texto-formulario" for="exampleFormControlTextarea1">Texto de consulta</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+            </div>
+          <!-- Button trigger modal -->
+          <div class="container">
+            <div class="row justify-content-center">
+              <button type="button" class="btn btn-primary formulario__boton" data-toggle="modal" data-target="#exampleModal">
+               Enviar consulta
+              </button>
+          
+             <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">consulta enviada</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                     </button>
+                   </div>
+                <div class="modal-body">
+                <p>Consulta enviada correctamente. En menos de 24 hs hábiles se le enviará un correo con su consulta.Muchas Gracias por su consulta.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <input class="btn btn-primary formulario__elemento" type="reset" value="Resetear">
+        </div>
+      </div>
+      </form>
+      <!--FOOTER-->
+      <footer class="container-fluid">
+        <div class="row justify-content-center">
+          <div class="col-2 centrarIconos">
+            <a href="https://www.facebook.com/?ref=logo"><img src="../fotos/facebook.png" alt="logo de facebook"></a>
+            <a href="https://www.instagram.com/?hl=es-la"><img src="../fotos/instagram.png" alt="logo de instagram"></a>
+            <a href="https://twitter.com/?lang=es"><img src="../fotos/twitter.png" alt="logo de twitter"></a>
+            <a href="https://web.whatsapp.com/">  <img src="../fotos/whatsapp.png" alt="logo de whatsapp"></a>
+            <a href="https://www.youtube.com/">  <img src="../fotos/youtube.png" alt="logo de youtube"></a>
+          </div>
+        </div>
+      </footer>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script> 
+  </body>
+</html>

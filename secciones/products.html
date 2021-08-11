@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <link rel="stylesheet" href="../css/final.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="icon" href="../fotos/logo_para_html_cafe.png" sizes="32x32" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <meta name="Viewport" content="width=device-width,initial-scale=1.0"/>
+    <!--SEO-->
+    <meta name="keywords" content="cafe, brasil, colombia, sabores,preparación">
+    <meta name="description" content="venta por menor y por mayor de granos de cafe organicos importados">
+    <title>
+      cafetin/productos
+    </title>    
+  </head>
+  <body id="background">
+    <!--NAVBAR-->
+    <nav class="navbar navbar-expand-lg navbar-dark indicaciones header">
+      <a class="navbar-brand" href="../index.html">
+        <img src="../fotos/logo_para_html_cafe.png" width="70" height="70" alt="imagen de un cartel con una taza de cafe">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="products.html">Productos</a>
+          </li>
+            <a class="nav-link" href="preguntas.html">Preguntas frecuentes</a>
+          <li class="nav-item">
+            <a class="nav-link" href="contacto.html">Contactenos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="blog.html">Blog</a>
+          </li>
+          <li class="nav-item" >
+            
+            <img src="../fotos/imagencarrito.png" id="cuadroCarrito" class="carritoCompras" alt="imagen de un carrito de supermercado">
+          
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!--Div para poner el cuadro de carrito -->
+    <div id="fondoCuadro" class="fondoCarrito"></div>
+    <!--TABLA CON INFORMACIÓN-->
+    <div class="table-responsive-sm table-padding">
+        <table class="table table-sm table-bordered cuadro">
+          <thead>
+            <tr>
+              <th scope="col">origen</th>
+              <th scope="col">tostados</th>
+              <th scope="col">granos</th>
+              <th scope="col">región</th>
+              <th scope="col">sabor</th>
+              <th>metodo de preparación</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Brasil</th>
+              <td>torrado</td>
+              <td>organico</td>
+              <td>amazona</td>
+              <td>
+                <ul>
+                  <li>frutales</li>
+                  <li>florales</li>
+                </ul>
+              </td>
+              <td>
+                <ol>
+                filtro
+                <li>calentar la jarra durante algunos minutos, llenándola de agua caliente</li>
+                <li>calcular una cucharada llena (7-8 gramos) de café cada dos tazas de agua</li>
+                <li>poner en la máquina la cantidad correcta de agua y extraer</li>
+                </ol>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Colombia</th>
+              <td>arábigo</td>
+              <td>orgánico</td>
+              <td>santander</td>
+              <td>
+                  <ul>
+                    <li>floral</li>
+                    <li>caramelo</li>
+                  </ul>
+              </td>
+              <td>
+                <ol>
+                  volturno
+                  <li>moler el cafe</li>
+                  <li>rellenar el filtro con el café molido</li>
+                  <li>llenar de agua la parte inferior de la cafetera hasta el tornillito</li>
+                  <li>cerrar la cafetera y colocarla sobre el fuego</li>
+                <li>En el momento que sube el agua a la parte de arriba,el café está listo</li>
+                </ol>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="tasas"></div>
+      <!-- TABLA AJAX-->
+      <section class="table-responsive-sm table-padding">
+        <table class="table table-sm table-bordered cuadro aRemover">
+            <thead>
+                <tr>
+                    <th>nombre</th>
+                    <th>descripcion</th>
+                </tr>
+                <tbody id="cafes">
+                    <!-- aca ingresan los datos del json libros tolkien -->
+                </tbody>
+            </thead>
+        </table>
+        <div class="wrapper">
+          <button type="button" class="btn btn-secondary" id="esconder">Esconder/mostrar cuadro</button>
+        </div>
+    </section>
+      <!--CARTA PARA COMPRAR-->
+      <div class=" d-flex justify-content-around align-items-center  flex-row carta">
+        <div class="card text-center venta">
+          <img src="../fotos/cafe_brasil_compra.png" class="card-img-top" alt="imagen de un paquete con café de Brasil">
+          <div class="card-body">
+            <h5 class="card-title titulo-carta">Café de Brasil</h5>
+            <p class="card-text texto-carta">CAFÉ BRASILERO GENUINO BOCNAT 232 X 1KG EN GRANO O MOLIDO</p>
+            <button type="button" class="btn btn-primary" id="botonBrasil">comprar</button>
+          </div>
+        </div>
+        <div class="card text-center venta">
+          <img src="../fotos/cafe_col_compra.png" class="card-img-top" alt="imagen de un paquete con café de Colombia">
+          <div class="card-body">
+            <h5 class="card-title titulo-carta">Café de Colombia</h5>
+            <p class="card-text texto-carta">CAFÉ OH! COLOMBIA GUANES GENUINO X 1KG EN GRANO O MOLIDO</p>
+            <button type="button" class="btn btn-primary" id="botonColombia">comprar</button>
+          </div>
+        <main id="cafe"></main>
+        </div>
+      </div>
+      <div id="listaDeCompras"></div>
+      <!--FOOTER-->
+    <footer class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-2 centrarIconos">
+          <a href="https://www.facebook.com/?ref=logo"><img src="../fotos/facebook.png" alt="logo de facebook" class="footer"></a>
+          <a href="https://www.instagram.com/?hl=es-la"><img src="../fotos/instagram.png" alt="logo de instagram" class="footer"></a>
+          <a href="https://twitter.com/?lang=es"><img src="../fotos/twitter.png" alt="logo de twitter" class="footer"></a>
+          <a href="https://web.whatsapp.com/">  <img src="../fotos/whatsapp.png" alt="logo de whatsapp" class="footer"></a>
+          <a href="https://www.youtube.com/">  <img src="../fotos/youtube.png" alt="logo de youtube" class="footer"></a>
+        </div>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  <!--  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>--> 
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script> 
+    <script src="compras.js"></script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+{
+    "locales": [{
+            "sucursal": "Parque Chacabuco",
+            "direccion": "Av. Eva peron 1359"
+        },
+        {
+            "sucursal": "Boedo",
+            "direccion": "Av. La Plata 1700"
+        }
+    ]
+}

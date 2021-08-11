@@ -1,0 +1,171 @@
+let cafes= sessionStorage.getItem('cafes');
+if (cafes == undefined){
+    sessionStorage.setItem(`cafes`, JSON.stringify([]));
+}
+
+//const compras = [];
+let id = 0;
+
+
+let botonBrasil = document.getElementById("botonBrasil");
+botonBrasil.onclick = () => {
+    let arrayDeCompras = JSON.parse(sessionStorage.getItem(`cafes`));
+    arrayDeCompras.push({ id: id++, nombre: "Café brasilero", precio: 1200 });  
+    sessionStorage.setItem(`cafes`,  JSON.stringify(arrayDeCompras));
+    mostrarListaDeCompras();
+};
+
+let botonColombia = document.getElementById("botonColombia");
+botonColombia.onclick = () => {
+    let arrayDeCompras = JSON.parse(sessionStorage.getItem(`cafes`));
+    arrayDeCompras.push({ id: id++, nombre: "Café colombiano", precio: 1250 });
+    sessionStorage.setItem(`cafes`, JSON.stringify(arrayDeCompras));
+    mostrarListaDeCompras();
+};
+function mostrarListaDeCompras (){
+    let verificar = document.getElementById("verificar");
+    if(verificar != null){
+        verificar.parentNode.removeChild(verificar);            
+    }
+    verificar = document.createElement("div");
+    verificar.setAttribute("id", "verificar");
+    for (const producto of JSON.parse(sessionStorage.getItem(`cafes`))) {
+        let contenedor = document.createElement("div");
+        contenedor.innerHTML = 
+        `<p> ID: ${producto.id}</p>
+        <p> Producto: ${producto.nombre}</p>
+        <b> $ ${producto.precio}</b>`;
+        verificar.appendChild(contenedor);
+    }
+    let listaDeCompras = document.getElementById ("listaDeCompras");
+    listaDeCompras.appendChild(verificar);
+}
+/*const productos = [
+{ id: 1, nombre: "Cafe colombiano", precio: 1250 },
+{ id: 2, nombre: "Cafe brasilero", precio: 1200 },];
+for (const producto of productos) {
+ $("#tasas").append(`<div><h3> ID: ${producto.id}</h3>
+ <p> Producto: ${producto.nombre}</p>
+ <b> $ ${producto.precio}</b></div>`);
+}*/
+
+$(document).ready(function(){
+    obtenerDatos();
+});
+
+function obtenerDatos(){
+    $.get("https://api.sampleapis.com/coffee/hot").done(function(resultado,estado){
+        if(estado == "success"){
+            //Me devuleve el array directamente
+            let datosRecibidos = resultado; 
+            datosRecibidos.forEach(cafe => {
+                if (cafe.title && cafe.description){
+                    $("#cafes").append("<tr><td>"+cafe.title+"</td><td>"+cafe.description+"</td></td>")
+                }
+            })
+        }
+    })
+}
+
+/*let visibilidad = true;
+$("#esconder").on('click', () => {
+    //if ternario
+    visibilidad ? $(".aRemover").css({ display: "none" }) : $(".aRemover").css({ display: "inline-block" });
+    visibilidad = !visibilidad;
+    console.log(visibilidad);
+});*/
+
+$(".wrapper").css("display" , "grid");
+
+$("#esconder").css("justify-self" , "center");
+
+//GET JSON
+
+const URLJSON = "vender.json";
+const mostrar = miProducto =>{$("#cafe").prepend(
+    `<div class=" d-flex justify-content-around align-items-center  flex-row carta">
+        <div class="card text-center venta">
+            <img src="${miProducto.imagen}" class="card-img-top" alt="imagen de un paquete con café de Colombia">
+            <h5 "card-title titulo-carta">${miProducto.nombre}</h5>
+            <p "card-text texto-carta"> ${miProducto.origen}</p>
+            <button ${miProducto.id}>Agregar al Carrito</button>
+        </div>
+    </div>`
+    )};
+$.getJSON( URLJSON, function (respuesta, estado) {
+    if(estado === "success"){
+        let arrayDeProductos = respuesta.cartas;
+        arrayDeProductos.forEach(mostrar);
+    }
+});
+   
+
+    /*miProducto.forEach (mostrar() =>{}
+    $("body").prepend(`<div>
+        <img>${dato.imagen}
+        <h3>${dato.nombre}</h3>
+        <p> ${dato.origen}</p>
+        </div>`)
+) */
+
+
+
+class CarritoDeCompras {
+    constructor(){
+        this.visibilidad = false;
+    }
+    mostrarCarrito () {
+        document.getElementById("fondoCuadro").style.display = this.visibilidad ? "none" : "inline-block";
+        this.visibilidad = ! this.visibilidad;
+    }
+}
+
+let visibilidad = false;
+let carritoDeCompras = new CarritoDeCompras();
+let carrito = document.getElementById("cuadroCarrito");
+carrito.addEventListener("click",carritoDeCompras.mostrarCarrito);
+
+/*let carrito = document.getElementById("cuadroCarrito");
+carrito.addEventListener("click",()=> {
+    document.getElementById("fondoCuadro").style.display = visibilidad ? "none" : "inline-block";
+    visibilidad = ! visibilidad;
+});*/
+
+/*Creo un Array de productos  */
+const productos = [
+    {
+        id:0, nombre: "CAFÉ GENUINO BOCNAT 232 X 1KG EN GRANO O MOLIDO", origen: "Brasil", precio: 2490, cantidad: 1
+    },
+    {
+        id:1, nombre: "Café Bourbon Moka x 1Kg en grano o molido", origen: "Brasil", precio: 2400, cantidad: 1
+    },
+    {
+        id:2, nombre: "CAFÉ OH! GUANES GENUINO X 1KG EN GRANO O MOLIDO", origen: "Colombia", precio: 2750, cantidad: 1
+    },
+    {
+        id:3, nombre: "Café Excelso Descafeinado x 1Kg en grano o molido", origen: "Colombia", precio: 3220, cantidad: 1
+    },
+    {
+        id:4, nombre: "Café De Especialidad Orgánico 1kg Grano O Molido", origen: "Etiopía", precio: 5240, cantidad: 1
+    },
+    {
+        id5, nombre: "Café de Especialidad Cristal x 1Kg en grano o molido", origen: "Guatemala", precio: 4250, cantidad: 1
+    }
+];
+
+const productosGuardadosLocal = (clave,valor)=> { localStorage.setItem(clave, valor) };
+
+for (const producto of productos){
+    productosGuardadosLocal(producto.id, JSON.stringify(producto));
+}
+
+
+const usuario = { nombre: "nombre", apellido: "apellido", edad : 2, email : "info@gmail.com", domicilio: "Eva peron 1359"};
+
+const usuarioGuardadoLocal = (clave,valor)=> { localStorage.setItem(clave, valor) };
+
+usuarioGuardadoLocal ("listaUsuario",JSON.stringify(usuario));
+
+
+
+
