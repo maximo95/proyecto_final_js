@@ -138,10 +138,16 @@ function crearCartas (objetoProductos){
     
 }
 function agregarACarrito (e) {
-    console.log(e);
+  for (const objetoDeArray of mostrarcartas){
+      if (objetoDeArray.id == e.target.id){
+          console.log(objetoDeArray.id);
+      }
+  }
 }
 let mostrarcartas = JSON.parse(localStorage.getItem("misproductos"));
 mostrarcartas.forEach(crearCartas);
+
+
 
 
 
