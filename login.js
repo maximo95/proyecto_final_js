@@ -11,16 +11,20 @@ function validarFormulario (e){
     let nombre = formulario.children[0].children[0].children[0].value;  
     let apellido = formulario.children[1].children[0].children[0].value; 
     let email = formulario.children[2].children[0].children[1].value;
-    sessionStorage.setItem('nombre', nombre);
-    sessionStorage.setItem('apellido', apellido);
-    sessionStorage.setItem('email', email); 
+    let usuario = {};
+    usuario.nombre = nombre ;
+    usuario.apellido = apellido;
+    usuario.email = email;
+    let usuarioEnJson = JSON.stringify(usuario);
+    localStorage.setItem("usuario",usuarioEnJson);
     saludar();
 }
 
 
 function saludar(){
-    let nombre = sessionStorage.getItem('nombre');
-    if (nombre != undefined ){
+    let usuario =JSON.parse(localStorage.getItem('usuario'));
+    let nombre = usuario.nombre;
+    if (usuario != undefined ){
         let verificar = document.getElementById("verificar");
 
         if(verificar != null){
@@ -35,6 +39,13 @@ function saludar(){
 }
 
 saludar();
+
+function guardarUsuario(){
+    let nombreUsuario = localStorage.getItem('nombre');
+    if (nombre != undefined){
+
+    }
+}
 
 //GETJSON Con boton para mostrar sucursales
 const URLJSON = "users.json";

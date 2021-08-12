@@ -1,3 +1,16 @@
+const URLJSON = "vender.json";
+function guardarProductoEnLocalStorage (){
+    $.getJSON( URLJSON,function(respuesta,estado){
+        if(estado === "success"){
+        let misproductos = respuesta.productos
+        const guardarApiLocal = JSON.stringify(misproductos);
+        localStorage.setItem("misproductos",guardarApiLocal);
+        }
+
+    })
+} 
+guardarProductoEnLocalStorage ();
+
 let cafes= sessionStorage.getItem('cafes');
 if (cafes == undefined){
     sessionStorage.setItem(`cafes`, JSON.stringify([]));
@@ -79,25 +92,77 @@ $(".wrapper").css("display" , "grid");
 
 $("#esconder").css("justify-self" , "center");
 
-//GET JSON
+//Cartas de cafe
 
-const URLJSON = "vender.json";
-const mostrar = miProducto =>{$("#cafe").prepend(
+const mostrar = miProducto => {
+    $("#cafe").prepend(
     `<div class=" d-flex justify-content-around align-items-center  flex-row carta">
         <div class="card text-center venta">
             <img src="${miProducto.imagen}" class="card-img-top" alt="imagen de un paquete con café de Colombia">
             <h5 "card-title titulo-carta">${miProducto.nombre}</h5>
             <p "card-text texto-carta"> ${miProducto.origen}</p>
-            <button ${miProducto.id}>Agregar al Carrito</button>
+            <button botonProducto_${miProducto.id}>Agregar al Carrito</button>
         </div>
     </div>`
-    )};
-$.getJSON( URLJSON, function (respuesta, estado) {
+    );
+//agregar evento
+};
+function crearCartas (objetoProductos){
+    let cartas = document.getElementById("cafe");
+    let cartasDivCartas = document.createElement("div");
+    let cartasImagen = document.createElement("img");
+    let cartasDivcuerpo =  document.createElement("div");
+    let cartasTexto = document.createElement("h5");//innertexto
+    let cartasParrafo = document.createElement("p");//innertexto
+    let cartasBoton = document.createElement("button");//innertexto
+    cartasDivCartas.classList.add("card", "text-center", "venta");
+    cartasImagen.classList.add("card-img-top");
+    cartasDivcuerpo.classList.add("card-body");
+    cartasTexto.classList.add("card-title", "titulo-carta");
+    cartasParrafo.classList.add("card-text", "texto-carta");
+    cartasBoton.classList.add("btn", "btn-primary");
+    cartas.appendChild(cartasDivCartas);
+    cartasDivCartas.appendChild(cartasImagen);
+    cartasDivCartas.appendChild(cartasDivcuerpo);
+    cartasDivcuerpo.appendChild(cartasTexto);
+    cartasDivcuerpo.appendChild(cartasParrafo);
+    cartasDivcuerpo.appendChild(cartasBoton);
+    cartasImagen.setAttribute("src", objetoProductos.imagen);
+    cartasImagen.setAttribute("alt","imagen de café");
+    cartasTexto.innerText = objetoProductos.nombre;
+    cartasParrafo.innerText = objetoProductos.origen;
+    cartasBoton.innerText = "agregar a carrito";
+    cartasBoton.setAttribute("id", objetoProductos.id);
+
+    cartasBoton.addEventListener("click", agregarACarrito)
+    
+}
+function agregarACarrito (e) {
+    console.log(e);
+}
+let mostrarcartas = JSON.parse(localStorage.getItem("misproductos"));
+mostrarcartas.forEach(crearCartas);
+
+
+
+//Función para hacer el click
+
+
+/*let cartas = document.getElementById("cafe");
+let cartasDivCartas = document.createElement("div");
+let cartasImagen = document.createElement("img").classList.add("card-img-top");
+let cartasDivcuerpo =  document.createElement("div").classList.add("card-body");
+let cartasTexto = document.createElement("h5").classList.add("card-title", "titulo-carta");//innertexto
+let cartasParrafo = document.createElement("p").classList.add("card-text", "texto-carta");//innertexto
+let cartasBoton = document.createElement("button").classList.add("btn", "btn-primary");//innertexto
+cartasDivCartas.classList.add("card", "text-center", "venta");*/
+
+/*$.getJSON( URLJSON, function (respuesta, estado) {
     if(estado === "success"){
         let arrayDeProductos = respuesta.cartas;
-        arrayDeProductos.forEach(mostrar);
+        arrayDeProductos.forEach(crearCartas);
     }
-});
+});*/
    
 
     /*miProducto.forEach (mostrar() =>{}
@@ -131,8 +196,8 @@ carrito.addEventListener("click",()=> {
     visibilidad = ! visibilidad;
 });*/
 
-/*Creo un Array de productos  */
-const productos = [
+/*Creo un Array de productos para guardarlos en loal storage  */
+/*const productos = [
     {
         id:0, nombre: "CAFÉ GENUINO BOCNAT 232 X 1KG EN GRANO O MOLIDO", origen: "Brasil", precio: 2490, cantidad: 1
     },
@@ -149,7 +214,7 @@ const productos = [
         id:4, nombre: "Café De Especialidad Orgánico 1kg Grano O Molido", origen: "Etiopía", precio: 5240, cantidad: 1
     },
     {
-        id5, nombre: "Café de Especialidad Cristal x 1Kg en grano o molido", origen: "Guatemala", precio: 4250, cantidad: 1
+        id:5, nombre: "Café de Especialidad Cristal x 1Kg en grano o molido", origen: "Guatemala", precio: 4250, cantidad: 1
     }
 ];
 
@@ -157,14 +222,15 @@ const productosGuardadosLocal = (clave,valor)=> { localStorage.setItem(clave, va
 
 for (const producto of productos){
     productosGuardadosLocal(producto.id, JSON.stringify(producto));
-}
+}*/
 
 
-const usuario = { nombre: "nombre", apellido: "apellido", edad : 2, email : "info@gmail.com", domicilio: "Eva peron 1359"};
+/*const usuario = { nombre: "nombre", apellido: "apellido", edad : 2, email : "info@gmail.com", domicilio: "Eva peron 1359"};
 
 const usuarioGuardadoLocal = (clave,valor)=> { localStorage.setItem(clave, valor) };
 
-usuarioGuardadoLocal ("listaUsuario",JSON.stringify(usuario));
+usuarioGuardadoLocal ("listaUsuario",JSON.stringify(usuario));*/
+
 
 
 
