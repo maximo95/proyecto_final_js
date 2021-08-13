@@ -134,20 +134,32 @@ function crearCartas (objetoProductos){
     cartasBoton.innerText = "agregar a carrito";
     cartasBoton.setAttribute("id", objetoProductos.id);
 
-    cartasBoton.addEventListener("click", agregarACarrito)
+    cartasBoton.addEventListener("click", eventoAgregarProducto)
     
 }
-function agregarACarrito (e) {
-  for (const objetoDeArray of mostrarcartas){
-      if (objetoDeArray.id == e.target.id){
-          console.log(objetoDeArray.id);
+function eventoAgregarProducto (e) {
+  for (const producto of arrayDeProductosParaVender){
+      if (producto.id == e.target.id){
+          console.log(producto.id);
+          comprobarCarrito (producto);
       }
   }
 }
-let mostrarcartas = JSON.parse(localStorage.getItem("misproductos"));
-mostrarcartas.forEach(crearCartas);
+let arrayDeProductosParaVender = JSON.parse(localStorage.getItem("misproductos"));
+arrayDeProductosParaVender.forEach(crearCartas);
 
-
+function comprobarCarrito (producto){
+    if (localStorage.getItem("carritoDeCompras") == undefined){
+        console.log("no existe carrito porque no está definido");
+        const carritoDeCompras= [];
+        producto.cantidad = 1;
+        carritoDeCompras.push(producto);
+        localStorage.setItem("carritoDeCompras",JSON.stringify(carritoDeCompras));
+    } else {
+       const listaEnCarrito = JSON.parse(localStorage.getItem("carritoDeCompras"));
+        console.log(listaEnCarrito);
+    }
+}
 
 
 
