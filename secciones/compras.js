@@ -150,15 +150,26 @@ arrayDeProductosParaVender.forEach(crearCartas);
 
 function comprobarCarrito (producto){
     if (localStorage.getItem("carritoDeCompras") == undefined){
-        console.log("no existe carrito porque no está definido");
         const carritoDeCompras= [];
         producto.cantidad = 1;
         carritoDeCompras.push(producto);
         localStorage.setItem("carritoDeCompras",JSON.stringify(carritoDeCompras));
-    } else {
-       const listaEnCarrito = JSON.parse(localStorage.getItem("carritoDeCompras"));
-        console.log(listaEnCarrito);
-    }
+    }else {
+        let listaEnCarrito = JSON.parse(localStorage.getItem("carritoDeCompras"));
+        let verificarExistencia = false;
+        listaEnCarrito.forEach(function (productoDeLista, indice, array){
+            if(producto.id == productoDeLista.id){
+                productoDeLista.cantidad ++;
+                listaEnCarrito[indice] = productoDeLista;
+                verificarExistencia = true;
+            }
+        });
+            if (!verificarExistencia){
+                producto.cantidad = 1;
+                listaEnCarrito.push(producto);
+            }
+        localStorage.setItem("carritoDeCompras",JSON.stringify(listaEnCarrito));
+    }     
 }
 
 

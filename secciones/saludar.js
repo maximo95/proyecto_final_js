@@ -1,7 +1,7 @@
 function saludar(){
-    let usuario =JSON.parse(localStorage.getItem('usuario'));
-    let nombre = usuario.nombre;
+    let usuario =JSON.parse(localStorage.getItem('usuario')); 
     if (usuario != undefined ){
+        let nombre = usuario.nombre;
         let verificar = document.getElementById("verificar");
 
         if(verificar != null){
