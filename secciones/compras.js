@@ -115,27 +115,34 @@ function crearCartas (objetoProductos){
     let cartasTexto = document.createElement("h5");//innertexto
     let cartasParrafo = document.createElement("p");//innertexto
     let cartasBoton = document.createElement("button");//innertexto
+    let botonRestar = document.createElement("button");
     cartasDivCartas.classList.add("card", "text-center", "venta");
     cartasImagen.classList.add("card-img-top");
     cartasDivcuerpo.classList.add("card-body");
     cartasTexto.classList.add("card-title", "titulo-carta");
     cartasParrafo.classList.add("card-text", "texto-carta");
     cartasBoton.classList.add("btn", "btn-primary");
+    botonRestar.classList.add ("btn", "btn-danger"); //Boton de prueba para mostrar la función de restar
     cartas.appendChild(cartasDivCartas);
     cartasDivCartas.appendChild(cartasImagen);
     cartasDivCartas.appendChild(cartasDivcuerpo);
     cartasDivcuerpo.appendChild(cartasTexto);
     cartasDivcuerpo.appendChild(cartasParrafo);
     cartasDivcuerpo.appendChild(cartasBoton);
+    cartasDivcuerpo.appendChild (botonRestar);
     cartasImagen.setAttribute("src", objetoProductos.imagen);
     cartasImagen.setAttribute("alt","imagen de café");
     cartasTexto.innerText = objetoProductos.nombre;
     cartasParrafo.innerText = objetoProductos.origen;
     cartasBoton.innerText = "agregar a carrito";
+    botonRestar.innerText = "eliminar producto";
     cartasBoton.setAttribute("id", objetoProductos.id);
+    botonRestar.setAttribute("id",objetoProductos.id);
 
     cartasBoton.addEventListener("click", eventoAgregarProducto)
-    
+
+    botonRestar.addEventListener ("click",eventoCorroborarProducto)
+
 }
 function eventoAgregarProducto (e) {
   for (const producto of arrayDeProductosParaVender){
@@ -172,6 +179,19 @@ function comprobarCarrito (producto){
     }     
 }
 
+function eventoCorroborarProducto (e) {
+    if (localStorage.getItem("carritoDeCompras") != undefined){
+        const listaDeElementosElegidos = JSON.parse(localStorage.getItem("carritoDeCompras"));
+        for (let i=0; i<listaDeElementosElegidos.length; i++){
+            if (listaDeElementosElegidos[i].id == e.target.id){
+                listaDeElementosElegidos[i].cantidad --
+            }
+        }
+        const listaFiltrada = listaDeElementosElegidos.filter(objeto => objeto.cantidad > 0 );
+        localStorage.setItem("carritoDeCompras",JSON.stringify(listaFiltrada));
+        }
+    }
+    
 
 
 //Función para hacer el click
