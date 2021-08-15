@@ -17,7 +17,7 @@ if (cafes == undefined){
 }
 
 //const compras = [];
-let id = 0;
+/*let id = 0;
 
 
 let botonBrasil = document.getElementById("botonBrasil");
@@ -52,7 +52,7 @@ function mostrarListaDeCompras (){
     }
     let listaDeCompras = document.getElementById ("listaDeCompras");
     listaDeCompras.appendChild(verificar);
-}
+}*/
 /*const productos = [
 { id: 1, nombre: "Cafe colombiano", precio: 1250 },
 { id: 2, nombre: "Cafe brasilero", precio: 1200 },];
@@ -109,23 +109,23 @@ const mostrar = miProducto => {
 };
 function crearCartas (objetoProductos){
     let cartas = document.getElementById("cafe");
-    let cartasDivCartas = document.createElement("div");
+    let cartasDivPrincipal = document.createElement("div");
     let cartasImagen = document.createElement("img");
     let cartasDivcuerpo =  document.createElement("div");
     let cartasTexto = document.createElement("h5");//innertexto
     let cartasParrafo = document.createElement("p");//innertexto
     let cartasBoton = document.createElement("button");//innertexto
     let botonRestar = document.createElement("button");
-    cartasDivCartas.classList.add("card", "text-center", "venta");
+    cartasDivPrincipal.classList.add("card", "text-center", "venta","limites");
     cartasImagen.classList.add("card-img-top");
     cartasDivcuerpo.classList.add("card-body");
     cartasTexto.classList.add("card-title", "titulo-carta");
     cartasParrafo.classList.add("card-text", "texto-carta");
     cartasBoton.classList.add("btn", "btn-primary");
     botonRestar.classList.add ("btn", "btn-danger"); //Boton de prueba para mostrar la función de restar
-    cartas.appendChild(cartasDivCartas);
-    cartasDivCartas.appendChild(cartasImagen);
-    cartasDivCartas.appendChild(cartasDivcuerpo);
+    cartas.appendChild(cartasDivPrincipal);
+    cartasDivPrincipal.appendChild(cartasImagen);
+    cartasDivPrincipal.appendChild(cartasDivcuerpo);
     cartasDivcuerpo.appendChild(cartasTexto);
     cartasDivcuerpo.appendChild(cartasParrafo);
     cartasDivcuerpo.appendChild(cartasBoton);

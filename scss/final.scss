@@ -218,3 +218,17 @@ ul{
     height:10rem;
     display: none;
 }
+
+.flex{
+    display : flex;
+    padding: 10px;
+    justify-content: center;
+    align-content: space-around;
+    flex-wrap: wrap;
+    width: calc(100% - 30rem);
+    margin-left: 15rem;
+}
+
+.limites{
+    margin: 0.1rem;
+}
