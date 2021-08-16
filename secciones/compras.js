@@ -134,8 +134,8 @@ function crearCartas (objetoProductos){
     cartasImagen.setAttribute("alt","imagen de café");
     cartasTexto.innerText = objetoProductos.nombre;
     cartasParrafo.innerText = objetoProductos.origen;
-    cartasBoton.innerText = "agregar a carrito";
-    botonRestar.innerText = "eliminar producto";
+    cartasBoton.innerText = "agregar carrito";
+    botonRestar.innerText = "eliminar";
     cartasBoton.setAttribute("id", objetoProductos.id);
     botonRestar.setAttribute("id",objetoProductos.id);
 
@@ -228,16 +228,119 @@ class CarritoDeCompras {
     constructor(){
         this.visibilidad = false;
     }
-    mostrarCarrito () {
+    mostrarCarrito (e) {
         document.getElementById("fondoCuadro").style.display = this.visibilidad ? "none" : "inline-block";
         this.visibilidad = ! this.visibilidad;
+        console.log(this);
+        this.crearItems();
+        if (this.visibilidad == false){
+            let separarDiv = document.getElementById("separarDiv");
+            separarDiv.parentNode.removeChild(separarDiv);
+            let divFinalizar = document.getElementById("divFinalizar");
+            divFinalizar.parentNode.removeChild(divFinalizar);
+        } else {
+            let botonFinalizarCompra =  document.createElement("button");//innertexto
+            let divFinalizarCompra = document.createElement("div");
+            divFinalizarCompra.setAttribute("id","divFinalizar");
+            //Le agruego una class 
+            divFinalizarCompra.classList.add("finalizarCompra");
+            //Sector de finalizar compra
+            divFinalizarCompra.appendChild(botonFinalizarCompra);
+            //Le agrego un texto al boton
+            botonFinalizarCompra.innerText = "finalizar compra";
+            document.getElementById("fondoCuadro").appendChild(divFinalizarCompra);
+        }
+    }
+    crearItems(){
+        if (localStorage.getItem("carritoDeCompras") != undefined){
+            let listaProdElegidos = JSON.parse(localStorage.getItem("carritoDeCompras"));
+            //Creo otro div para separar la parte de finalizar comprar y evitar que entre al forEach
+            let flexCarritoDivision = document.createElement("div");
+            //Creo una variable para llamar al elemento principal al cual appendear estos elementos
+            let flexCarrito = document.getElementById ("fondoCuadro")
+            //Le agrego un id al div que separa las secciones de compras
+            flexCarritoDivision.setAttribute("id","separarDiv");
+            //creo el sector de finalizar carrito
+            flexCarrito.appendChild(flexCarritoDivision);
+            listaProdElegidos.forEach(this.crearUnItem)
+        }
+    }
+    //Creo una función que crea los items del carrito en el navbar
+    crearUnItem(objetoItem){
+        let flexCarrito = document.getElementById("separarDiv");
+        let itemCarrito = document.createElement("div");
+        let divImagenProducto = document.createElement("div");
+        let imagenProducto = document.createElement("img");//poner src
+        let nombrePrecioTotal = document.createElement("div");
+        let nombreProducto = document.createElement("div");
+        let nombre = document.createElement("p");//innertexto
+        let precioTotalProducto = document.createElement("div");
+        let precioIndividual = document.createElement("div");
+        let precioUnProducto = document.createElement("p");//innertexto
+        let precioCantidad = document.createElement("div");
+        let precioDeCantidad = document.createElement("p");//innertexto
+        let divUnidades = document.createElement("div");
+        let botonRestarUnidades = document.createElement("button");//innertexto
+        let numeroUnidades = document.createElement("p");//innertexto
+        let botonSumarUnidades = document.createElement("button");//innertexto
+        //Les agrego clases a los elementos creados
+        itemCarrito.classList.add("itemCarrito");
+        divImagenProducto.classList.add("imagen-producto");
+        imagenProducto.classList.add("tamaño-imagen");
+        nombrePrecioTotal.classList.add("nombre-precio-total");
+        nombreProducto.classList.add("nombre-producto");
+        precioTotalProducto.classList.add("precio-total-producto");
+        precioIndividual.classList.add("precioIndividual");
+        precioCantidad.classList.add("precioCantidad");
+        divUnidades.classList.add("unidades");
+        //Establesco la organización de los elementos a através de appendChild
+        //sector de la imagen
+        flexCarrito.appendChild(itemCarrito);
+        itemCarrito.appendChild(divImagenProducto);
+        divImagenProducto.appendChild(imagenProducto);
+        //sector del nombre y los precios   
+        itemCarrito.appendChild(nombrePrecioTotal);
+        //nombre del producto seleccionado
+        nombrePrecioTotal.appendChild(nombreProducto);
+        nombreProducto.appendChild(nombre);
+        //precio de un producto y precio del total de la cantidad del mismo producto
+        nombrePrecioTotal.appendChild(precioTotalProducto);
+         //precio de un solo producto
+        precioTotalProducto.appendChild(precioIndividual);
+        precioIndividual.appendChild(precioUnProducto);
+        //precio de la cantidad total de un producto
+        precioTotalProducto.appendChild(precioCantidad)
+        precioCantidad.appendChild(precioDeCantidad);
+        //sector de unidades
+        itemCarrito.appendChild(divUnidades);
+        //botones y cantidad
+        //boton de restar cantidades
+        divUnidades.appendChild(botonRestarUnidades);
+        divUnidades.appendChild(numeroUnidades);
+        divUnidades.appendChild(botonSumarUnidades);
+        //Agruegar con setAttribute atributos a la imagen
+        imagenProducto.setAttribute("src",objetoItem.imagen);
+        imagenProducto.setAttribute("alt","imagen de café");
+        //Agregar con setAttribute los ID de los botones
+
+        botonRestarUnidades.setAttribute("id", `${objetoItem.id}_resta`);
+        botonSumarUnidades.setAttribute("id",`${objetoItem.id}_suma`);
+        itemCarrito.setAttribute("id","itemCarrito")
+
+        //Con innerText le agrego a los elementos los textos correspondientes
+        nombre.innerText = objetoItem.nombre;
+        precioUnProducto.innerText = objetoItem.precio;
+        precioDeCantidad.innerText = objetoItem.precio*objetoItem.cantidad;
+        botonRestarUnidades.innerText = "-";
+        numeroUnidades.innerText = objetoItem.cantidad;
+        botonSumarUnidades.innerText = "+";
     }
 }
 
 let visibilidad = false;
 let carritoDeCompras = new CarritoDeCompras();
 let carrito = document.getElementById("cuadroCarrito");
-carrito.addEventListener("click",carritoDeCompras.mostrarCarrito);
+carrito.addEventListener("click",carritoDeCompras.mostrarCarrito.bind(carritoDeCompras));
 
 /*let carrito = document.getElementById("cuadroCarrito");
 carrito.addEventListener("click",()=> {

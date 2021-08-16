@@ -207,28 +207,111 @@ ul{
 .informacion-blog{
     font-weight: bold;
 }
-
+/*CARRITO DE COMPRAS DEL NAV-BAR */
 .carritoCompras{
     width: 30px;
     height:30px;
 }
-.fondoCarrito{
-    background-color: white;
-    width: 10rem;
-    height:10rem;
-    display: none;
+.flex-carrito{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
+.fondoCarrito{
+    width: 45rem;
+    display: none;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.itemCarrito{
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+.imagen-producto{
+    width: 10%;
+}
+
+.tamaño-imagen{
+    width: 100%;
+}
+
+.nombre-precio-total{
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.nombre-producto{
+    height: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+.precio-total-producto{
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.precioIndividual{
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+.precioCantidad{
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+.unidades{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.finalizarCompra{
+    background-color:#386150;
+    width: 100%;
+    position: relative;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+}
+
+/* cartas*/
 .flex{
     display : flex;
     padding: 10px;
     justify-content: center;
     align-content: space-around;
     flex-wrap: wrap;
-    width: calc(100% - 30rem);
-    margin-left: 15rem;
+    width: calc(100% - 6rem);
+    margin-left: 3rem;
 }
 
 .limites{
-    margin: 0.1rem;
+    margin: 2.2rem;
 }
+
+
