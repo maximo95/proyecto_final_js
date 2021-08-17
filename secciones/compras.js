@@ -38,7 +38,7 @@ function crearCartas (objetoProductos){
     cartasTexto.classList.add("card-title", "titulo-carta");
     cartasParrafo.classList.add("card-text", "texto-carta");
     cartasBoton.classList.add("btn", "btn-primary");
-    botonRestar.classList.add ("btn", "btn-danger"); //Boton de prueba para mostrar la función de restar
+    botonRestar.classList.add ("btn", "btn-danger","separarBotones"); //Boton de prueba para mostrar la función de restar
     //Agrego un elemento a elemento padre para poder establecer un orden
     cartas.appendChild(cartasDivPrincipal);
     cartasDivPrincipal.appendChild(cartasImagen);
