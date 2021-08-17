@@ -23,7 +23,7 @@ function validarFormulario (e){
 
 function saludar(){
     let usuario =JSON.parse(localStorage.getItem('usuario'));
-    let nombre = usuario.nombre;
+    
     if (usuario != undefined ){
         let verificar = document.getElementById("verificar");
 
@@ -35,6 +35,7 @@ function saludar(){
         saludo.setAttribute("id", "verificar");
         saludo.innerHTML = `<h4>¡Hola ${nombre}!</h4>`; 
         elementoSaludo.appendChild(saludo);
+        let nombre = usuario.nombre;
     }
 }
 
@@ -46,34 +47,3 @@ function guardarUsuario(){
 
     }
 }
-
-//GETJSON Con boton para mostrar sucursales
-const URLJSON = "users.json";
-//Agregamos un botón con jQuery
-$("#sucursales").prepend('<button id="btn">mostrar dirección</button>');
- //Escuchamos el evento click del botón agregado
-$("#btn").click(
-    () => {
-    $.getJSON(URLJSON, function(respuesta, estado) {
-    console.log(respuesta);
-         
-        if (estado === "success") {
-             let misDatos = respuesta.locales;
-            
-             $("#sucursales-container").html('');
-
-            for (const dato of misDatos) {
-
-                 $("#sucursales-container").append(`<div>
-
-                        <h3>${dato.sucursal}</h3>
-
-                        <p> ${dato.direccion}</p>
-
-                             </div>`)
-
-            }
-
-         }
-    })
-});
