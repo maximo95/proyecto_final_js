@@ -1,113 +1,28 @@
+//Atraves de una variable llamo el archivo Json que contiene el array de producto
 const URLJSON = "vender.json";
+//Mediante una funcion guardo en el local storage el array que se encuentra en el api
 function guardarProductoEnLocalStorage (){
+    //Estoy pidiendo un archivo y luego ejerciendo una función de callback
     $.getJSON( URLJSON,function(respuesta,estado){
+        //Con este condicional establesco que si la carga es correcta ejecuta la función
         if(estado === "success"){
+        //creo una variable le asigno el valor del array de productos devueltos por el ajax
         let misproductos = respuesta.productos
+        //A una constante le asigno el valor  del array subido al localstorage
         const guardarApiLocal = JSON.stringify(misproductos);
         localStorage.setItem("misproductos",guardarApiLocal);
         }
 
     })
 } 
+//Llamo para que se ejecute la funcion
 guardarProductoEnLocalStorage ();
-
-let cafes= sessionStorage.getItem('cafes');
-if (cafes == undefined){
-    sessionStorage.setItem(`cafes`, JSON.stringify([]));
-}
-
-//const compras = [];
-/*let id = 0;
-
-
-let botonBrasil = document.getElementById("botonBrasil");
-botonBrasil.onclick = () => {
-    let arrayDeCompras = JSON.parse(sessionStorage.getItem(`cafes`));
-    arrayDeCompras.push({ id: id++, nombre: "Café brasilero", precio: 1200 });  
-    sessionStorage.setItem(`cafes`,  JSON.stringify(arrayDeCompras));
-    mostrarListaDeCompras();
-};
-
-let botonColombia = document.getElementById("botonColombia");
-botonColombia.onclick = () => {
-    let arrayDeCompras = JSON.parse(sessionStorage.getItem(`cafes`));
-    arrayDeCompras.push({ id: id++, nombre: "Café colombiano", precio: 1250 });
-    sessionStorage.setItem(`cafes`, JSON.stringify(arrayDeCompras));
-    mostrarListaDeCompras();
-};
-function mostrarListaDeCompras (){
-    let verificar = document.getElementById("verificar");
-    if(verificar != null){
-        verificar.parentNode.removeChild(verificar);            
-    }
-    verificar = document.createElement("div");
-    verificar.setAttribute("id", "verificar");
-    for (const producto of JSON.parse(sessionStorage.getItem(`cafes`))) {
-        let contenedor = document.createElement("div");
-        contenedor.innerHTML = 
-        `<p> ID: ${producto.id}</p>
-        <p> Producto: ${producto.nombre}</p>
-        <b> $ ${producto.precio}</b>`;
-        verificar.appendChild(contenedor);
-    }
-    let listaDeCompras = document.getElementById ("listaDeCompras");
-    listaDeCompras.appendChild(verificar);
-}*/
-/*const productos = [
-{ id: 1, nombre: "Cafe colombiano", precio: 1250 },
-{ id: 2, nombre: "Cafe brasilero", precio: 1200 },];
-for (const producto of productos) {
- $("#tasas").append(`<div><h3> ID: ${producto.id}</h3>
- <p> Producto: ${producto.nombre}</p>
- <b> $ ${producto.precio}</b></div>`);
-}*/
-
-$(document).ready(function(){
-    obtenerDatos();
-});
-
-function obtenerDatos(){
-    $.get("https://api.sampleapis.com/coffee/hot").done(function(resultado,estado){
-        if(estado == "success"){
-            //Me devuleve el array directamente
-            let datosRecibidos = resultado; 
-            datosRecibidos.forEach(cafe => {
-                if (cafe.title && cafe.description){
-                    $("#cafes").append("<tr><td>"+cafe.title+"</td><td>"+cafe.description+"</td></td>")
-                }
-            })
-        }
-    })
-}
-
-/*let visibilidad = true;
-$("#esconder").on('click', () => {
-    //if ternario
-    visibilidad ? $(".aRemover").css({ display: "none" }) : $(".aRemover").css({ display: "inline-block" });
-    visibilidad = !visibilidad;
-    console.log(visibilidad);
-});*/
-
-$(".wrapper").css("display" , "grid");
-
-$("#esconder").css("justify-self" , "center");
 
 //Cartas de cafe
 
-const mostrar = miProducto => {
-    $("#cafe").prepend(
-    `<div class=" d-flex justify-content-around align-items-center  flex-row carta">
-        <div class="card text-center venta">
-            <img src="${miProducto.imagen}" class="card-img-top" alt="imagen de un paquete con café de Colombia">
-            <h5 "card-title titulo-carta">${miProducto.nombre}</h5>
-            <p "card-text texto-carta"> ${miProducto.origen}</p>
-            <button botonProducto_${miProducto.id}>Agregar al Carrito</button>
-        </div>
-    </div>`
-    );
-//agregar evento
-};
+//A través de una funcion  que tiene como parametro el array de objetos creo las cartas
 function crearCartas (objetoProductos){
+    //creo los elementos que forman parte de las cartas
     let cartas = document.getElementById("cafe");
     let cartasDivPrincipal = document.createElement("div");
     let cartasImagen = document.createElement("img");
@@ -116,6 +31,7 @@ function crearCartas (objetoProductos){
     let cartasParrafo = document.createElement("p");//innertexto
     let cartasBoton = document.createElement("button");//innertexto
     let botonRestar = document.createElement("button");
+    //Les agrego las clases correspondientes
     cartasDivPrincipal.classList.add("card", "text-center", "venta","limites");
     cartasImagen.classList.add("card-img-top");
     cartasDivcuerpo.classList.add("card-body");
@@ -123,6 +39,7 @@ function crearCartas (objetoProductos){
     cartasParrafo.classList.add("card-text", "texto-carta");
     cartasBoton.classList.add("btn", "btn-primary");
     botonRestar.classList.add ("btn", "btn-danger"); //Boton de prueba para mostrar la función de restar
+    //Agrego un elemento a elemento padre para poder establecer un orden
     cartas.appendChild(cartasDivPrincipal);
     cartasDivPrincipal.appendChild(cartasImagen);
     cartasDivPrincipal.appendChild(cartasDivcuerpo);
@@ -130,55 +47,76 @@ function crearCartas (objetoProductos){
     cartasDivcuerpo.appendChild(cartasParrafo);
     cartasDivcuerpo.appendChild(cartasBoton);
     cartasDivcuerpo.appendChild (botonRestar);
+    //A través setAttribut le asigno src y el alt a la imagen de la carta
     cartasImagen.setAttribute("src", objetoProductos.imagen);
     cartasImagen.setAttribute("alt","imagen de café");
+    //Le agrego a las cartas a traves del innertext le agrego a la carta el nombre y origen obteniendo del array (como parametro)
     cartasTexto.innerText = objetoProductos.nombre;
     cartasParrafo.innerText = objetoProductos.origen;
+    //Les agrego el nombre de la funcion de los botones 
     cartasBoton.innerText = "agregar carrito";
     botonRestar.innerText = "eliminar";
+    //Les agrego a los botones su id correspondiente
     cartasBoton.setAttribute("id", objetoProductos.id);
     botonRestar.setAttribute("id",objetoProductos.id);
-
+    //agrego un evento a cada boton para que se ejecute
     cartasBoton.addEventListener("click", eventoAgregarProducto)
 
     botonRestar.addEventListener ("click",eventoCorroborarProducto)
 
 }
+//creo una funcion en la cual establesco como parametro el evento 
 function eventoAgregarProducto (e) {
+    //Itero el array para encontrar el producto que ocacionó el evento
   for (const producto of arrayDeProductosParaVender){
-      if (producto.id == e.target.id){
+      //Estables un condicional comparando id del producto con el id del evento 
+    if (producto.id == e.target.id){
           console.log(producto.id);
+          //ejecuta la funcion para eel producto que genero el evento
           comprobarCarrito (producto);
       }
   }
 }
+//Creo una variable y le asigno el array del localstorage parseado
 let arrayDeProductosParaVender = JSON.parse(localStorage.getItem("misproductos"));
+//Uso foreach para que cada objeto del array le aplico la funcion crear cartas
 arrayDeProductosParaVender.forEach(crearCartas);
-
+//Creo una funcion que tenga como parametro producto 
 function comprobarCarrito (producto){
+    //Establesco un if para corroborarque el carrito de compras esté vacío
     if (localStorage.getItem("carritoDeCompras") == undefined){
+        //creo un array vacio para poder pushear los productos seleccionados
         const carritoDeCompras= [];
+        //Le agrego un atributo al objeto
         producto.cantidad = 1;
+        //Le agrego elemento al array 
         carritoDeCompras.push(producto);
+        //Guardo en el localStorage el array de objetos carritoDeCompras
         localStorage.setItem("carritoDeCompras",JSON.stringify(carritoDeCompras));
     }else {
+        //variable con valore del array del local storage
         let listaEnCarrito = JSON.parse(localStorage.getItem("carritoDeCompras"));
+        //le asigno a una variable el valor de false para que se empiece a ejecutar
         let verificarExistencia = false;
+        //con un forEach busco el producto para hace un update del valos
         listaEnCarrito.forEach(function (productoDeLista, indice, array){
+            //Con un condicional comparo que sea el producto si verifica hago un update en el array
             if(producto.id == productoDeLista.id){
                 productoDeLista.cantidad ++;
                 listaEnCarrito[indice] = productoDeLista;
                 verificarExistencia = true;
             }
         });
+        //si el producto no está en la lista lo agrego
             if (!verificarExistencia){
                 producto.cantidad = 1;
                 listaEnCarrito.push(producto);
             }
+            //subo los cambios al local
         localStorage.setItem("carritoDeCompras",JSON.stringify(listaEnCarrito));
     }     
 }
-
+//Hago una funcion para restar productos y evaluo si tengo que sacarlo de la lista o no
 function eventoCorroborarProducto (e) {
     if (localStorage.getItem("carritoDeCompras") != undefined){
         const listaDeElementosElegidos = JSON.parse(localStorage.getItem("carritoDeCompras"));
@@ -192,47 +130,19 @@ function eventoCorroborarProducto (e) {
         }
     }
     
-
-
-//Función para hacer el click
-
-
-/*let cartas = document.getElementById("cafe");
-let cartasDivCartas = document.createElement("div");
-let cartasImagen = document.createElement("img").classList.add("card-img-top");
-let cartasDivcuerpo =  document.createElement("div").classList.add("card-body");
-let cartasTexto = document.createElement("h5").classList.add("card-title", "titulo-carta");//innertexto
-let cartasParrafo = document.createElement("p").classList.add("card-text", "texto-carta");//innertexto
-let cartasBoton = document.createElement("button").classList.add("btn", "btn-primary");//innertexto
-cartasDivCartas.classList.add("card", "text-center", "venta");*/
-
-/*$.getJSON( URLJSON, function (respuesta, estado) {
-    if(estado === "success"){
-        let arrayDeProductos = respuesta.cartas;
-        arrayDeProductos.forEach(crearCartas);
-    }
-});*/
-   
-
-    /*miProducto.forEach (mostrar() =>{}
-    $("body").prepend(`<div>
-        <img>${dato.imagen}
-        <h3>${dato.nombre}</h3>
-        <p> ${dato.origen}</p>
-        </div>`)
-) */
-
-
-
+//Creo una clase para mostrar el carrito de compras
 class CarritoDeCompras {
+    //Constructor que define una variable para indicarnos si tenemos o no que mostrar el carrito
     constructor(){
         this.visibilidad = false;
     }
+    //Funcion para mostrar el carrito
     mostrarCarrito (e) {
         document.getElementById("fondoCuadro").style.display = this.visibilidad ? "none" : "inline-block";
         this.visibilidad = ! this.visibilidad;
         console.log(this);
         this.crearItems();
+        //Si tenemo que ocultarlo eliminos lo que tiene dentro
         if (this.visibilidad == false){
             let separarDiv = document.getElementById("separarDiv");
             separarDiv.parentNode.removeChild(separarDiv);
@@ -297,6 +207,11 @@ class CarritoDeCompras {
         precioIndividual.classList.add("precioIndividual");
         precioCantidad.classList.add("precioCantidad");
         divUnidades.classList.add("unidades");
+        precioDeCantidad.classList.add("letra");
+        precioUnProducto.classList.add("letra");
+        nombre.classList.add("letraNombre");
+        botonRestarUnidades.classList.add("btn", "btn-primary", "btn-sm","contornoBoton");
+        botonSumarUnidades.classList.add("btn", "btn-primary", "btn-sm","contornoBoton");
         //Establesco la organización de los elementos a através de appendChild
         //sector de la imagen
         flexCarrito.appendChild(itemCarrito);
@@ -334,7 +249,7 @@ class CarritoDeCompras {
         //Con innerText le agrego a los elementos los textos correspondientes
         nombre.innerText = objetoItem.nombre;
         precioUnProducto.innerText = "Precio de un producto: " + objetoItem.precio;
-        precioDeCantidad.innerText = "Precio de la cantidad seleccionada: " +  objetoItem.precio*objetoItem.cantidad;
+        precioDeCantidad.innerText = "Precio de la cantidad: " +  objetoItem.precio*objetoItem.cantidad;
         botonRestarUnidades.innerText = "-";
         numeroUnidades.innerText = objetoItem.cantidad;
         botonSumarUnidades.innerText = "+";
@@ -344,12 +259,13 @@ class CarritoDeCompras {
         botonSumarUnidades.addEventListener("click", eventoAumentarCarrito.bind(carritoDeCompras))
     }
 }
-
-let visibilidad = false;
+//Creo un objeto de la clase CarritoDeCompras
 let carritoDeCompras = new CarritoDeCompras();
+//Obtego el elemento del icono del carrito
 let carrito = document.getElementById("cuadroCarrito");
+//Como el metodo de la clase usa otra funcion de la misma cambiamos el contexto de evento
 carrito.addEventListener("click",carritoDeCompras.mostrarCarrito.bind(carritoDeCompras));
-
+//Creo una funcion para el evento del boton de restar unidades
 function eventoRestarCantidad (e) {
     if (localStorage.getItem("carritoDeCompras") != undefined){
         const listaDeElementosElegidos = JSON.parse(localStorage.getItem("carritoDeCompras"));
@@ -360,11 +276,12 @@ function eventoRestarCantidad (e) {
         }
         const listaFiltrada = listaDeElementosElegidos.filter(objeto => objeto.cantidad > 0 );
         localStorage.setItem("carritoDeCompras",JSON.stringify(listaFiltrada));
+        //oculto y mustro la lista para poder tener actualizada
         this.mostrarCarrito ()
         this.mostrarCarrito ()
         }
     }
-
+    //Creo una funcion para el evento del boton de sumar unidades
     function eventoAumentarCarrito (e) {
         for (const producto of arrayDeProductosParaVender){
             if (producto.id == e.target.getAttribute("producto_id")) {

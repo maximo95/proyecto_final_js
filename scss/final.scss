@@ -286,7 +286,7 @@ ul{
 .unidades{
     display: flex;
     flex-wrap: wrap;
-    align-content: center;
+    align-content: space-between;
     justify-content: center;
     align-items: baseline;
 }
@@ -315,4 +315,17 @@ ul{
     margin: 2.2rem;
 }
 
+.letra{
+    font-size: 0.80rem;
+    color: cadetblue;
+    
+}
+.letraNombre{
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.contornoBoton{
+    margin:0.2rem
+}
 
