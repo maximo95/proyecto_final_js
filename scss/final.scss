@@ -219,12 +219,13 @@ ul{
 }
 
 .fondoCarrito{
-    width: 45rem;
+    width: 35rem;
     display: none;
     position: absolute;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    z-index:2;
 }
 
 .itemCarrito{

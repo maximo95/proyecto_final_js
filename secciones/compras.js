@@ -239,7 +239,10 @@ class CarritoDeCompras {
             let divFinalizar = document.getElementById("divFinalizar");
             divFinalizar.parentNode.removeChild(divFinalizar);
         } else {
+            //creo el boton de finalizar compra
             let botonFinalizarCompra =  document.createElement("button");//innertexto
+            //le agrego un Id
+            botonFinalizarCompra.setAttribute("id","botonAlerta");
             let divFinalizarCompra = document.createElement("div");
             divFinalizarCompra.setAttribute("id","divFinalizar");
             //Le agruego una class 
@@ -249,6 +252,7 @@ class CarritoDeCompras {
             //Le agrego un texto al boton
             botonFinalizarCompra.innerText = "finalizar compra";
             document.getElementById("fondoCuadro").appendChild(divFinalizarCompra);
+            botonFinalizarCompra.addEventListener ("click", mostrarAlerta)
         }
     }
     crearItems(){
@@ -323,17 +327,21 @@ class CarritoDeCompras {
         imagenProducto.setAttribute("alt","imagen de café");
         //Agregar con setAttribute los ID de los botones
 
-        botonRestarUnidades.setAttribute("id", `${objetoItem.id}_resta`);
-        botonSumarUnidades.setAttribute("id",`${objetoItem.id}_suma`);
+        botonRestarUnidades.setAttribute("producto_id",objetoItem.id);
+        botonSumarUnidades.setAttribute("producto_id",objetoItem.id);
         itemCarrito.setAttribute("id","itemCarrito")
 
         //Con innerText le agrego a los elementos los textos correspondientes
         nombre.innerText = objetoItem.nombre;
-        precioUnProducto.innerText = objetoItem.precio;
-        precioDeCantidad.innerText = objetoItem.precio*objetoItem.cantidad;
+        precioUnProducto.innerText = "Precio de un producto: " + objetoItem.precio;
+        precioDeCantidad.innerText = "Precio de la cantidad seleccionada: " +  objetoItem.precio*objetoItem.cantidad;
         botonRestarUnidades.innerText = "-";
         numeroUnidades.innerText = objetoItem.cantidad;
         botonSumarUnidades.innerText = "+";
+
+        //Agrego Funciones de sumar y restar a los botones
+        botonRestarUnidades.addEventListener ("click",eventoRestarCantidad.bind(carritoDeCompras))
+        botonSumarUnidades.addEventListener("click", eventoAumentarCarrito.bind(carritoDeCompras))
     }
 }
 
@@ -342,46 +350,43 @@ let carritoDeCompras = new CarritoDeCompras();
 let carrito = document.getElementById("cuadroCarrito");
 carrito.addEventListener("click",carritoDeCompras.mostrarCarrito.bind(carritoDeCompras));
 
-/*let carrito = document.getElementById("cuadroCarrito");
-carrito.addEventListener("click",()=> {
-    document.getElementById("fondoCuadro").style.display = visibilidad ? "none" : "inline-block";
-    visibilidad = ! visibilidad;
-});*/
-
-/*Creo un Array de productos para guardarlos en loal storage  */
-/*const productos = [
-    {
-        id:0, nombre: "CAFÉ GENUINO BOCNAT 232 X 1KG EN GRANO O MOLIDO", origen: "Brasil", precio: 2490, cantidad: 1
-    },
-    {
-        id:1, nombre: "Café Bourbon Moka x 1Kg en grano o molido", origen: "Brasil", precio: 2400, cantidad: 1
-    },
-    {
-        id:2, nombre: "CAFÉ OH! GUANES GENUINO X 1KG EN GRANO O MOLIDO", origen: "Colombia", precio: 2750, cantidad: 1
-    },
-    {
-        id:3, nombre: "Café Excelso Descafeinado x 1Kg en grano o molido", origen: "Colombia", precio: 3220, cantidad: 1
-    },
-    {
-        id:4, nombre: "Café De Especialidad Orgánico 1kg Grano O Molido", origen: "Etiopía", precio: 5240, cantidad: 1
-    },
-    {
-        id:5, nombre: "Café de Especialidad Cristal x 1Kg en grano o molido", origen: "Guatemala", precio: 4250, cantidad: 1
+function eventoRestarCantidad (e) {
+    if (localStorage.getItem("carritoDeCompras") != undefined){
+        const listaDeElementosElegidos = JSON.parse(localStorage.getItem("carritoDeCompras"));
+        for (let i=0; i<listaDeElementosElegidos.length; i++){
+            if (listaDeElementosElegidos[i].id == e.target.getAttribute("producto_id")){
+                listaDeElementosElegidos[i].cantidad --
+            }
+        }
+        const listaFiltrada = listaDeElementosElegidos.filter(objeto => objeto.cantidad > 0 );
+        localStorage.setItem("carritoDeCompras",JSON.stringify(listaFiltrada));
+        this.mostrarCarrito ()
+        this.mostrarCarrito ()
+        }
     }
-];
 
-const productosGuardadosLocal = (clave,valor)=> { localStorage.setItem(clave, valor) };
+    function eventoAumentarCarrito (e) {
+        for (const producto of arrayDeProductosParaVender){
+            if (producto.id == e.target.getAttribute("producto_id")) {
+                console.log(producto.id);
+                comprobarCarrito (producto);
+            }
+        }
+        this.mostrarCarrito ()
+        this.mostrarCarrito ()
+      }
+//Creo una función que me permitira mostrar la alerta una vez hecho el click
+function mostrarAlerta(e){
+    //Llamo al evento para mostrar carrito que muestra y oculta los elemento
+    carritoDeCompras.mostrarCarrito();
+    //creo la alerta se vera en la pantalla a través del id del div en el html
+    let mostrarAlertaCompra = document.getElementById("alertaCompra");
+    //Le agrego las clases de bootstrap
+    mostrarAlertaCompra.classList.add("alert", "alert-success");
+    //Agrego texto
+    mostrarAlertaCompra.innerText = "Su compra se realizado Nos pondremos en contacto para realizar el envió";
 
-for (const producto of productos){
-    productosGuardadosLocal(producto.id, JSON.stringify(producto));
-}*/
-
-
-/*const usuario = { nombre: "nombre", apellido: "apellido", edad : 2, email : "info@gmail.com", domicilio: "Eva peron 1359"};
-
-const usuarioGuardadoLocal = (clave,valor)=> { localStorage.setItem(clave, valor) };
-
-usuarioGuardadoLocal ("listaUsuario",JSON.stringify(usuario));*/
+}
 
 
 

@@ -190,12 +190,13 @@ ul {
   justify-content: flex-end; }
 
 .fondoCarrito {
-  width: 45rem;
+  width: 35rem;
   display: none;
   position: absolute;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  z-index: 2; }
 
 .itemCarrito {
   background-color: white;
